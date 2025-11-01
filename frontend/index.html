@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Premium IPTV streaming services with global channels, VOD, and 24/7 support." />
+    <title>StreamGlobe IPTV</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --color-primary: #5b7cfa;
+        --color-primary-dark: #425cdd;
+        --color-secondary: #0b1d3a;
+        --color-bg: #f7f9fc;
+        --color-surface: #ffffff;
+        --color-text: #1f2937;
+        --color-muted: #6b7280;
+        --color-accent: #f97316;
+        --shadow-sm: 0 8px 24px rgba(15, 23, 42, 0.08);
+        --shadow-lg: 0 20px 45px rgba(15, 23, 42, 0.12);
+        --radius-sm: 12px;
+        --radius-lg: 24px;
+        --transition-base: 200ms ease;
+        --max-width: 1120px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background-color: var(--color-bg);
+        color: var(--color-text);
+        line-height: 1.7;
+        min-height: 100vh;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+        border-radius: var(--radius-sm);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      p {
+        margin: 0 0 1rem;
+        color: var(--color-muted);
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        color: var(--color-secondary);
+        margin: 0 0 0.75rem;
+        line-height: 1.2;
+      }
+
+      .container {
+        width: min(100% - 2.5rem, var(--max-width));
+        margin-inline: auto;
+      }
+
+      .section {
+        padding: clamp(4rem, 6vw, 6rem) 0;
+      }
+
+      .section__intro {
+        text-align: center;
+        max-width: 620px;
+        margin: 0 auto 3rem;
+      }
+
+      .grid {
+        display: grid;
+        gap: 1.75rem;
+      }
+
+      .card {
+        background: var(--color-surface);
+        padding: 2rem;
+        border-radius: var(--radius-sm);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .cta-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+        color: #fff;
+        padding: 0.9rem 1.8rem;
+        border-radius: 999px;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+        transition: transform var(--transition-base), box-shadow var(--transition-base);
+      }
+
+      .cta-button:hover,
+      .cta-button:focus-visible {
+        transform: translateY(-2px);
+        box-shadow: 0 18px 35px rgba(91, 124, 250, 0.28);
+      }
+
+      .cta-button--ghost {
+        background: rgba(91, 124, 250, 0.12);
+        color: var(--color-primary);
+        box-shadow: none;
+      }
+
+      .cta-button--ghost:hover,
+      .cta-button--ghost:focus-visible {
+        background: rgba(91, 124, 250, 0.22);
+      }
+
+      .header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: rgba(247, 249, 252, 0.94);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(91, 124, 250, 0.1);
+      }
+
+      .header .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.5rem;
+        padding: 1rem 0;
+      }
+
+      .logo {
+        font-size: 1.35rem;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+      }
+
+      .logo span {
+        color: var(--color-primary);
+      }
+
+      .nav {
+        position: relative;
+      }
+
+      .nav__links {
+        display: flex;
+        align-items: center;
+        gap: 1.75rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .nav__links a {
+        font-weight: 500;
+        color: var(--color-muted);
+        transition: color var(--transition-base);
+      }
+
+      .nav__links a:hover,
+      .nav__links a:focus-visible {
+        color: var(--color-secondary);
+      }
+
+      .nav__toggle {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.35rem;
+        width: 3rem;
+        height: 3rem;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        padding: 0.5rem;
+      }
+
+      .nav__toggle-line {
+        height: 2px;
+        background: var(--color-secondary);
+        border-radius: 1px;
+        transition: transform var(--transition-base), opacity var(--transition-base);
+      }
+
+      .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        border: 0;
+        clip: rect(0 0 0 0);
+        overflow: hidden;
+        white-space: nowrap;
+      }
+
+      .hero {
+        padding-top: clamp(6rem, 10vw, 8.5rem);
+      }
+
+      .hero__content {
+        display: grid;
+        gap: 2.5rem;
+        align-items: center;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero__eyebrow {
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--color-primary);
+      }
+
+      .hero h1 {
+        font-size: clamp(2.5rem, 5vw, 3.5rem);
+        margin-bottom: 1rem;
+      }
+
+      .hero__actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .hero__stats {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.25rem;
+        font-size: 0.95rem;
+        color: var(--color-muted);
+      }
+
+      .hero__stats strong {
+        display: block;
+        font-size: 1.5rem;
+        color: var(--color-secondary);
+      }
+
+      .device-card {
+        position: relative;
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        box-shadow: var(--shadow-lg);
+      }
+
+      .device-card__badge {
+        position: absolute;
+        top: 1.5rem;
+        left: 1.5rem;
+        background: rgba(11, 29, 58, 0.85);
+        color: #fff;
+        padding: 0.35rem 0.85rem;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .device-card__details {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 1.5rem;
+        background: linear-gradient(180deg, rgba(15, 23, 42, 0.2), rgba(15, 23, 42, 0.85));
+        color: #e2e8f0;
+        font-size: 0.95rem;
+      }
+
+      .features__grid {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .feature {
+        border: 1px solid rgba(91, 124, 250, 0.15);
+        transition: transform var(--transition-base), border-color var(--transition-base);
+      }
+
+      .feature:hover {
+        transform: translateY(-6px);
+        border-color: rgba(91, 124, 250, 0.35);
+      }
+
+      .feature__icon {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
+
+      .plans {
+        background: linear-gradient(180deg, rgba(91, 124, 250, 0.08), rgba(91, 124, 250, 0));
+      }
+
+      .billing-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 1rem;
+        background: var(--color-surface);
+        border-radius: 999px;
+        padding: 0.35rem 0.75rem;
+        box-shadow: var(--shadow-sm);
+        margin: 0 auto 2.5rem;
+      }
+
+      .billing-toggle__label {
+        font-weight: 500;
+        color: var(--color-muted);
+      }
+
+      .billing-toggle__save {
+        color: var(--color-accent);
+        font-weight: 600;
+      }
+
+      .billing-toggle__switch {
+        position: relative;
+        width: 60px;
+        height: 30px;
+        border-radius: 999px;
+        border: none;
+        background: rgba(91, 124, 250, 0.25);
+        cursor: pointer;
+        transition: background var(--transition-base);
+      }
+
+      .billing-toggle__thumb {
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: var(--shadow-sm);
+        transition: transform var(--transition-base);
+      }
+
+      .plans__grid {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      }
+
+      .plan {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .plan__badge {
+        position: absolute;
+        top: 1.25rem;
+        right: 1.25rem;
+        background: var(--color-accent);
+        color: #fff;
+        padding: 0.35rem 0.75rem;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .plan__tagline {
+        margin-bottom: 1.5rem;
+        color: var(--color-muted);
+      }
+
+      .plan__price {
+        font-size: 2.25rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        color: var(--color-secondary);
+      }
+
+      .plan__price .plan__billing {
+        font-size: 1rem;
+        font-weight: 500;
+        color: var(--color-muted);
+      }
+
+      .plan__features {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 2rem;
+        display: grid;
+        gap: 0.75rem;
+        color: var(--color-muted);
+      }
+
+      .plan--highlight {
+        border: 2px solid rgba(91, 124, 250, 0.6);
+        transform: translateY(-8px);
+      }
+
+      .channels__grid {
+        display: grid;
+        gap: 1.5rem;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .channels__group {
+        background: var(--color-surface);
+        padding: 1.5rem;
+        border-radius: var(--radius-sm);
+        border: 1px solid rgba(91, 124, 250, 0.1);
+      }
+
+      .channels__group h3 {
+        margin-bottom: 1rem;
+      }
+
+      .channels__group ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 0.5rem;
+        color: var(--color-muted);
+      }
+
+      .channels__note {
+        margin-top: 2rem;
+        font-size: 0.9rem;
+        color: var(--color-muted);
+        text-align: center;
+      }
+
+      .devices__grid {
+        display: grid;
+        gap: 1.75rem;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      }
+
+      .device {
+        text-align: center;
+        font-weight: 600;
+      }
+
+      .device span {
+        display: block;
+        margin-top: 0.85rem;
+        color: var(--color-secondary);
+      }
+
+      .testimonials {
+        background: linear-gradient(180deg, rgba(11, 29, 58, 0.94), rgba(11, 29, 58, 0.86));
+        color: #fff;
+      }
+
+      .testimonials .section__intro h2,
+      .testimonials .section__intro p {
+        color: inherit;
+      }
+
+      .testimonials__grid {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      }
+
+      .testimonial {
+        background: rgba(255, 255, 255, 0.08);
+        color: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      .testimonial blockquote {
+        margin: 0 0 1.5rem;
+        font-size: 1.05rem;
+      }
+
+      .testimonial__meta {
+        display: block;
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.7);
+        margin-top: 0.35rem;
+      }
+
+      .faq__list {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .faq__item {
+        background: var(--color-surface);
+        border-radius: var(--radius-sm);
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
+      }
+
+      .faq__question {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        border: none;
+        background: transparent;
+        padding: 1.5rem;
+        text-align: left;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .faq__icon {
+        font-size: 1.35rem;
+        color: var(--color-primary);
+        transition: transform var(--transition-base);
+      }
+
+      .faq__answer {
+        padding: 0 1.5rem 1.5rem;
+        color: var(--color-muted);
+        border-top: 1px solid rgba(91, 124, 250, 0.12);
+      }
+
+      .faq__item.is-open .faq__icon {
+        transform: rotate(45deg);
+      }
+
+      .contact {
+        background: var(--color-surface);
+      }
+
+      .contact__container {
+        display: grid;
+        gap: 2.5rem;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .contact__copy ul {
+        list-style: none;
+        padding: 0;
+        margin: 1.5rem 0 0;
+        color: var(--color-muted);
+        display: grid;
+        gap: 0.75rem;
+      }
+
+      .contact__form {
+        display: grid;
+        gap: 1.25rem;
+        padding: 2rem;
+        border-radius: var(--radius-sm);
+        box-shadow: var(--shadow-sm);
+        background: linear-gradient(180deg, #fff, #eef2ff);
+      }
+
+      .contact__form label {
+        display: grid;
+        gap: 0.5rem;
+        font-weight: 500;
+        color: var(--color-secondary);
+      }
+
+      .contact__form input,
+      .contact__form select,
+      .contact__form textarea {
+        font: inherit;
+        padding: 0.75rem 1rem;
+        border-radius: 12px;
+        border: 1px solid rgba(91, 124, 250, 0.25);
+        background: rgba(255, 255, 255, 0.9);
+        transition: border var(--transition-base), box-shadow var(--transition-base);
+      }
+
+      .contact__form input:focus,
+      .contact__form select:focus,
+      .contact__form textarea:focus {
+        outline: none;
+        border-color: rgba(91, 124, 250, 0.65);
+        box-shadow: 0 0 0 3px rgba(91, 124, 250, 0.18);
+      }
+
+      .contact__terms {
+        font-size: 0.85rem;
+        color: var(--color-muted);
+        margin: 0;
+      }
+
+      .footer {
+        background: #0d172b;
+        color: rgba(226, 232, 240, 0.84);
+      }
+
+      .footer__container {
+        display: grid;
+        gap: 2.5rem;
+        grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr));
+        padding: clamp(3rem, 5vw, 4rem) 0;
+      }
+
+      .logo--footer span {
+        color: #fff;
+      }
+
+      .footer__links h4 {
+        color: #fff;
+        margin-bottom: 1rem;
+      }
+
+      .footer__links ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 0.5rem;
+      }
+
+      .footer__links a {
+        color: rgba(226, 232, 240, 0.7);
+        font-size: 0.95rem;
+      }
+
+      .footer__links a:hover,
+      .footer__links a:focus-visible {
+        color: #fff;
+      }
+
+      .footer__bottom {
+        border-top: 1px solid rgba(226, 232, 240, 0.15);
+        padding: 1.5rem 0;
+      }
+
+      .footer__bottom-content {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .back-to-top {
+        font-weight: 600;
+        color: var(--color-primary);
+      }
+
+      @media (max-width: 1024px) {
+        .hero__content {
+          grid-template-columns: 1fr;
+        }
+
+        .hero__media {
+          order: -1;
+        }
+
+        .contact__container,
+        .footer__container {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .header .container {
+          padding-inline: 0;
+        }
+
+        .nav__toggle {
+          display: flex;
+        }
+
+        .nav__links {
+          position: absolute;
+          top: 110%;
+          right: 0;
+          background: var(--color-surface);
+          border-radius: var(--radius-sm);
+          box-shadow: var(--shadow-lg);
+          flex-direction: column;
+          align-items: stretch;
+          width: min(280px, 75vw);
+          padding: 1.25rem;
+          transform-origin: top right;
+          transform: scale(0.95);
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity var(--transition-base), transform var(--transition-base);
+        }
+
+        .nav__links.is-open {
+          opacity: 1;
+          transform: scale(1);
+          pointer-events: auto;
+        }
+
+        .nav__links li {
+          padding: 0.75rem 0;
+        }
+
+        .nav__links li + li {
+          border-top: 1px solid rgba(91, 124, 250, 0.1);
+        }
+
+        .hero__stats {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 560px) {
+        .header .container {
+          flex-wrap: wrap;
+        }
+
+        .hero h1 {
+          font-size: 2.25rem;
+        }
+
+        .hero__stats {
+          grid-template-columns: 1fr;
+        }
+
+        .card {
+          padding: 1.75rem;
+        }
+
+        .billing-toggle {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .plans__grid,
+        .testimonials__grid,
+        .devices__grid,
+        .channels__grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <div class="logo">StreamGlobe<span>IPTV</span></div>
+        <nav class="nav" aria-label="Main navigation">
+          <button class="nav__toggle" aria-expanded="false" aria-controls="navigation-links">
+            <span class="nav__toggle-line"></span>
+            <span class="nav__toggle-line"></span>
+            <span class="nav__toggle-line"></span>
+            <span class="visually-hidden">Open menu</span>
+          </button>
+          <ul id="navigation-links" class="nav__links">
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#plans">Plans</a></li>
+            <li><a href="#channels">Channels</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <a class="cta-button" href="#plans">Start Free Trial</a>
+      </div>
+    </header>
+
+    <main>
+      <section id="hero" class="hero">
+        <div class="container hero__content">
+          <div class="hero__text">
+            <p class="hero__eyebrow">#1 IPTV provider worldwide</p>
+            <h1>All your favorite channels, ready when you are.</h1>
+            <p>
+              Stream live TV, sports, movies, and on-demand content from any device. Enjoy buffer-free quality, instant activation, and round-the-clock support.
+            </p>
+            <div class="hero__actions">
+              <a class="cta-button" href="#plans">View Plans</a>
+              <a class="cta-button cta-button--ghost" href="#channels">Explore Channels</a>
+            </div>
+            <div class="hero__stats">
+              <div>
+                <strong>18k+</strong>
+                <span>Live channels</span>
+              </div>
+              <div>
+                <strong>60k+</strong>
+                <span>Movies &amp; series</span>
+              </div>
+              <div>
+                <strong>99.9%</strong>
+                <span>Uptime guarantee</span>
+              </div>
+            </div>
+          </div>
+          <div class="hero__media">
+            <div class="device-card">
+              <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=600&q=80" alt="Smart TV streaming interface" />
+              <div class="device-card__badge">4K UHD + HDR</div>
+              <div class="device-card__details">
+                <span>Seamless streaming on Smart TVs, Firestick, Android, iOS &amp; more.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" class="section features">
+        <div class="container">
+          <div class="section__intro">
+            <h2>Why switch to StreamGlobe IPTV?</h2>
+            <p>Premium features crafted for unmatched viewing satisfaction.</p>
+          </div>
+          <div class="grid features__grid">
+            <article class="card feature">
+              <div class="feature__icon" aria-hidden="true">⚡</div>
+              <h3>Instant Activation</h3>
+              <p>Access thousands of channels immediately after purchase with automated provisioning.</p>
+            </article>
+            <article class="card feature">
+              <div class="feature__icon" aria-hidden="true">🎬</div>
+              <h3>Vast On-Demand Library</h3>
+              <p>Stay up-to-date with an ever-growing collection of blockbuster movies and TV shows.</p>
+            </article>
+            <article class="card feature">
+              <div class="feature__icon" aria-hidden="true">🛡️</div>
+              <h3>Secure &amp; Reliable</h3>
+              <p>Cutting-edge infrastructure delivers consistent streaming with minimal buffering or downtime.</p>
+            </article>
+            <article class="card feature">
+              <div class="feature__icon" aria-hidden="true">📞</div>
+              <h3>24/7 Support</h3>
+              <p>Our IPTV specialists are always available to help you troubleshoot and optimize your setup.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="plans" class="section plans">
+        <div class="container">
+          <div class="section__intro">
+            <h2>Pick the perfect plan</h2>
+            <p>Flexible subscriptions tailored to how and where you watch.</p>
+          </div>
+          <div class="billing-toggle" role="group" aria-label="Plan billing period">
+            <span class="billing-toggle__label">Monthly</span>
+            <button id="billingToggle" class="billing-toggle__switch" aria-pressed="false">
+              <span class="billing-toggle__thumb"></span>
+            </button>
+            <span class="billing-toggle__label">Yearly <span class="billing-toggle__save">Save 20%</span></span>
+          </div>
+          <div class="grid plans__grid">
+            <article class="card plan" data-plan="starter">
+              <h3>Starter</h3>
+              <p class="plan__tagline">Perfect for casual viewers</p>
+              <p class="plan__price" data-monthly="$19/mo" data-yearly="$15/mo">
+                <span class="plan__amount">$19</span>
+                <span class="plan__billing">/mo</span>
+              </p>
+              <ul class="plan__features">
+                <li>8,000+ live channels</li>
+                <li>20,000 VOD titles</li>
+                <li>2 simultaneous streams</li>
+                <li>Catch-up TV (24 hours)</li>
+              </ul>
+              <a class="cta-button" href="#contact">Start 3-day trial</a>
+            </article>
+            <article class="card plan plan--highlight" data-plan="premium">
+              <div class="plan__badge">Most Popular</div>
+              <h3>Premium</h3>
+              <p class="plan__tagline">All-in experience for families</p>
+              <p class="plan__price" data-monthly="$29/mo" data-yearly="$23/mo">
+                <span class="plan__amount">$29</span>
+                <span class="plan__billing">/mo</span>
+              </p>
+              <ul class="plan__features">
+                <li>18,000+ live channels</li>
+                <li>45,000 VOD titles</li>
+                <li>4 simultaneous streams</li>
+                <li>7-day catch-up + DVR</li>
+              </ul>
+              <a class="cta-button" href="#contact">Start 7-day trial</a>
+            </article>
+            <article class="card plan" data-plan="ultimate">
+              <h3>Ultimate</h3>
+              <p class="plan__tagline">For power viewers &amp; businesses</p>
+              <p class="plan__price" data-monthly="$45/mo" data-yearly="$36/mo">
+                <span class="plan__amount">$45</span>
+                <span class="plan__billing">/mo</span>
+              </p>
+              <ul class="plan__features">
+                <li>All premium sports &amp; PPV</li>
+                <li>60,000+ VOD titles</li>
+                <li>8 simultaneous streams</li>
+                <li>Priority concierge support</li>
+              </ul>
+              <a class="cta-button" href="#contact">Talk to sales</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="channels" class="section channels">
+        <div class="container">
+          <div class="section__intro">
+            <h2>World-class channels &amp; categories</h2>
+            <p>Discover a curated lineup spanning sports, entertainment, documentaries, kids, and news.</p>
+          </div>
+          <div class="channels__grid">
+            <div class="channels__group">
+              <h3>Sports</h3>
+              <ul>
+                <li>ESPN &amp; ESPN+</li>
+                <li>beIN Sports</li>
+                <li>Sky Sports</li>
+                <li>NFL Network</li>
+              </ul>
+            </div>
+            <div class="channels__group">
+              <h3>Entertainment</h3>
+              <ul>
+                <li>HBO Max</li>
+                <li>Showtime</li>
+                <li>AMC</li>
+                <li>FX</li>
+              </ul>
+            </div>
+            <div class="channels__group">
+              <h3>International</h3>
+              <ul>
+                <li>Canal+</li>
+                <li>Star Plus</li>
+                <li>SONY LIV</li>
+                <li>DAZN</li>
+              </ul>
+            </div>
+            <div class="channels__group">
+              <h3>Family &amp; Kids</h3>
+              <ul>
+                <li>Disney Channel</li>
+                <li>Cartoon Network</li>
+                <li>Nickelodeon</li>
+                <li>Nat Geo Kids</li>
+              </ul>
+            </div>
+            <div class="channels__group">
+              <h3>Documentary</h3>
+              <ul>
+                <li>National Geographic</li>
+                <li>Discovery Channel</li>
+                <li>History</li>
+                <li>Animal Planet</li>
+              </ul>
+            </div>
+            <div class="channels__group">
+              <h3>News</h3>
+              <ul>
+                <li>BBC World News</li>
+                <li>CNN</li>
+                <li>Al Jazeera</li>
+                <li>CNBC</li>
+              </ul>
+            </div>
+          </div>
+          <div class="channels__note">Streaming availability varies by region. Channel lineup updates monthly.</div>
+        </div>
+      </section>
+
+      <section class="section devices">
+        <div class="container">
+          <div class="section__intro">
+            <h2>Works on every screen you own</h2>
+            <p>Get instant access on your smart TV, desktop, mobile devices, and streaming sticks.</p>
+          </div>
+          <div class="devices__grid">
+            <div class="device">
+              <img src="https://images.unsplash.com/photo-1526072848611-53991f6fcaf8?auto=format&fit=crop&w=400&q=80" alt="Smart TV" />
+              <span>Smart TVs</span>
+            </div>
+            <div class="device">
+              <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=400&q=80" alt="Mobile and tablet" />
+              <span>iOS &amp; Android</span>
+            </div>
+            <div class="device">
+              <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=80" alt="Laptop" />
+              <span>Windows &amp; Mac</span>
+            </div>
+            <div class="device">
+              <img src="https://images.unsplash.com/photo-1618005198919-d3d4b5a92eee?auto=format&fit=crop&w=400&q=80" alt="Streaming stick" />
+              <span>Firestick &amp; Android TV</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section testimonials">
+        <div class="container">
+          <div class="section__intro">
+            <h2>Loved by streamers worldwide</h2>
+            <p>Thousands of cord-cutters trust StreamGlobe IPTV every day.</p>
+          </div>
+          <div class="grid testimonials__grid">
+            <figure class="card testimonial">
+              <blockquote>
+                “I finally cut the cord without missing my favorite sports. The stream quality is top-notch even during big games.”
+              </blockquote>
+              <figcaption>
+                <span class="testimonial__name">Jordan M.</span>
+                <span class="testimonial__meta">Premium Plan • Toronto, CA</span>
+              </figcaption>
+            </figure>
+            <figure class="card testimonial">
+              <blockquote>
+                “Setup took less than 10 minutes on my Firestick. Customer support walked me through every step via chat.”
+              </blockquote>
+              <figcaption>
+                <span class="testimonial__name">Priya S.</span>
+                <span class="testimonial__meta">Starter Plan • Dubai, UAE</span>
+              </figcaption>
+            </figure>
+            <figure class="card testimonial">
+              <blockquote>
+                “The catch-up feature is a lifesaver. I can rewatch shows anytime, and the parental controls are easy to manage.”
+              </blockquote>
+              <figcaption>
+                <span class="testimonial__name">Carlos R.</span>
+                <span class="testimonial__meta">Ultimate Plan • Madrid, ES</span>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" class="section faq">
+        <div class="container">
+          <div class="section__intro">
+            <h2>Frequently asked questions</h2>
+            <p>Quick answers to the most common IPTV questions.</p>
+          </div>
+          <div class="faq__list" role="list">
+            <article class="faq__item" role="listitem">
+              <button class="faq__question" aria-expanded="false">
+                What devices are compatible with StreamGlobe IPTV?
+                <span class="faq__icon">+</span>
+              </button>
+              <div class="faq__answer" hidden>
+                <p>Our service works on Smart TVs, Android &amp; iOS devices, Windows/Mac desktops, MAG boxes, Firestick, Android TV boxes, and more. We provide setup guides for every platform.</p>
+              </div>
+            </article>
+            <article class="faq__item" role="listitem">
+              <button class="faq__question" aria-expanded="false">
+                How does the free trial work?
+                <span class="faq__icon">+</span>
+              </button>
+              <div class="faq__answer" hidden>
+                <p>Pick your preferred plan and request a trial activation. You will receive login credentials instantly and can cancel anytime before your trial ends without charges.</p>
+              </div>
+            </article>
+            <article class="faq__item" role="listitem">
+              <button class="faq__question" aria-expanded="false">
+                Can I use my subscription on multiple devices?
+                <span class="faq__icon">+</span>
+              </button>
+              <div class="faq__answer" hidden>
+                <p>Yes. Each plan lists the number of simultaneous streams included. You can add extra connections to any plan if you need more devices.</p>
+              </div>
+            </article>
+            <article class="faq__item" role="listitem">
+              <button class="faq__question" aria-expanded="false">
+                Do you offer refunds?
+                <span class="faq__icon">+</span>
+              </button>
+              <div class="faq__answer" hidden>
+                <p>We provide full refunds within the first 7 days of activation if our service does not perform as promised. Simply reach out to support and we will handle the rest.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="section contact">
+        <div class="container contact__container">
+          <div class="contact__copy">
+            <h2>Ready to start streaming?</h2>
+            <p>Submit the form and our onboarding team will help you activate the perfect IPTV plan for your household or business.</p>
+            <ul class="contact__highlights">
+              <li>Free migration assistance from cable or satellite</li>
+              <li>Partner discounts for resellers &amp; hotels</li>
+              <li>Secure payments via Stripe, PayPal &amp; crypto</li>
+            </ul>
+          </div>
+          <form class="contact__form" aria-label="Contact form" novalidate>
+            <label>
+              Full name
+              <input type="text" name="name" placeholder="Jane Doe" required />
+            </label>
+            <label>
+              Email address
+              <input type="email" name="email" placeholder="you@example.com" required />
+            </label>
+            <label>
+              Preferred plan
+              <select name="plan">
+                <option value="starter">Starter</option>
+                <option value="premium">Premium</option>
+                <option value="ultimate">Ultimate</option>
+                <option value="reseller">Reseller / Custom</option>
+              </select>
+            </label>
+            <label>
+              Message
+              <textarea name="message" rows="4" placeholder="Tell us about your streaming setup"></textarea>
+            </label>
+            <button type="submit" class="cta-button">Request Activation</button>
+            <p class="contact__terms">By submitting this form, you agree to our Terms of Service and Privacy Policy.</p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer__container">
+        <div>
+          <div class="logo logo--footer">StreamGlobe<span>IPTV</span></div>
+          <p>Premium IPTV experiences for cord-cutters around the globe.</p>
+        </div>
+        <div class="footer__links">
+          <div>
+            <h4>Company</h4>
+            <ul>
+              <li><a href="#features">About</a></li>
+              <li><a href="#plans">Pricing</a></li>
+              <li><a href="#contact">Partners</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Support</h4>
+            <ul>
+              <li><a href="#faq">Help center</a></li>
+              <li><a href="#contact">Contact</a></li>
+              <li><a href="#">System status</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="#">Terms</a></li>
+              <li><a href="#">Privacy</a></li>
+              <li><a href="#">Refund policy</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <div class="container footer__bottom-content">
+          <p>&copy; <span id="currentYear"></span> StreamGlobe IPTV. All rights reserved.</p>
+          <a class="back-to-top" href="#hero">Back to top ↑</a>
+        </div>
+      </div>
+    </footer>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const navToggle = document.querySelector(".nav__toggle");
+        const navLinks = document.querySelector(".nav__links");
+        const billingToggle = document.getElementById("billingToggle");
+        const priceBlocks = document.querySelectorAll(".plan__price");
+        const faqItems = document.querySelectorAll(".faq__item");
+        const footerYear = document.getElementById("currentYear");
+        const contactForm = document.querySelector(".contact__form");
+
+        if (navToggle && navLinks) {
+          navToggle.addEventListener("click", () => {
+            const isOpen = navLinks.classList.toggle("is-open");
+            navToggle.setAttribute("aria-expanded", String(isOpen));
+            navToggle.querySelector(".visually-hidden").textContent = isOpen ? "Close menu" : "Open menu";
+          });
+
+          navLinks.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", () => {
+              if (navLinks.classList.contains("is-open")) {
+                navLinks.classList.remove("is-open");
+                navToggle.setAttribute("aria-expanded", "false");
+                navToggle.querySelector(".visually-hidden").textContent = "Open menu";
+              }
+            });
+          });
+        }
+
+        if (billingToggle) {
+          billingToggle.addEventListener("click", () => {
+            const isYearly = billingToggle.getAttribute("aria-pressed") === "true";
+            billingToggle.setAttribute("aria-pressed", String(!isYearly));
+            billingToggle.classList.toggle("is-active", !isYearly);
+
+            priceBlocks.forEach((price) => {
+              const planAmount = price.querySelector(".plan__amount");
+              const planBilling = price.querySelector(".plan__billing");
+
+              if (!planAmount || !planBilling) {
+                return;
+              }
+
+              const displayPrice = !isYearly ? price.dataset.yearly : price.dataset.monthly;
+              if (displayPrice) {
+                const [amount, billing] = displayPrice.split("/");
+                planAmount.textContent = amount;
+                planBilling.textContent = billing ? `/${billing}` : "";
+              }
+            });
+          });
+        }
+
+        if (faqItems.length) {
+          faqItems.forEach((item) => {
+            const question = item.querySelector(".faq__question");
+            const answer = item.querySelector(".faq__answer");
+            if (!question || !answer) {
+              return;
+            }
+
+            question.addEventListener("click", () => {
+              const isExpanded = question.getAttribute("aria-expanded") === "true";
+              question.setAttribute("aria-expanded", String(!isExpanded));
+              item.classList.toggle("is-open", !isExpanded);
+              answer.hidden = isExpanded;
+            });
+          });
+        }
+
+        if (footerYear) {
+          footerYear.textContent = new Date().getFullYear();
+        }
+
+        if (contactForm) {
+          contactForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const formData = new FormData(contactForm);
+            const summary = `Thanks, ${formData.get("name") || "streamer"}! Our team will reach out at ${formData.get("email") || "the email provided"} within 24 hours.`;
+
+            contactForm.reset();
+            alert(summary);
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

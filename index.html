@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PRIMESAT DZ IPTV</title>
+<script>
+tailwind.config={theme:{extend:{colors:{accent:"var(--accent)",glass:"rgba(15,23,42,0.55)"},boxShadow:{glow:"0 0 45px rgba(34,211,238,0.45)"},fontFamily:{primary:["Tajawal","Cairo","Poppins","Nunito","sans-serif"]},animation:{float:"float 6s ease-in-out infinite",shimmer:"shimmer 1.8s linear infinite",ticker:"ticker 18s linear infinite",glowPulse:"glowPulse 3s ease-in-out infinite"},keyframes:{float:{0:{transform:"translate3d(0,0,0)"},50:{transform:"translate3d(0,-20px,20px)"},100:{transform:"translate3d(0,0,0)"}},glowPulse:{0:{boxShadow:"0 0 25px rgba(34,211,238,0.25)"},50:{boxShadow:"0 0 55px rgba(34,211,238,0.55)"},100:{boxShadow:"0 0 25px rgba(34,211,238,0.25)"}}}}};
+</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+:root{--accent:#22d3ee;--glow:0.6;--font:'Tajawal','Cairo','Poppins','Nunito','sans-serif';}
+body{font-family:var(--font);transition:background 0.6s ease,color 0.6s ease;}
+.glass-surface{backdrop-filter:blur(28px);background:rgba(15,23,42,0.55);border:1px solid rgba(255,255,255,0.08);}
+.glass-light{backdrop-filter:blur(24px);background:rgba(255,255,255,0.18);border:1px solid rgba(255,255,255,0.25);}
+.gradient-mask{mask-image:radial-gradient(circle at center,rgba(255,255,255,1) 0%,rgba(255,255,255,0.1) 65%,rgba(255,255,255,0) 90%);}
+@keyframes shimmer{0%{background-position:-200% 0;}100%{background-position:200% 0;}}
+.loader-bar{background:linear-gradient(90deg,rgba(34,211,238,0.2),rgba(34,211,238,0.8),rgba(14,165,233,0.2));background-size:200% 100%;animation:shimmer 1.8s linear infinite;}
+@keyframes ticker{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+.news-ticker-track{animation:ticker 18s linear infinite;}
+[data-theme="dark"]{background:radial-gradient(circle at 20% 20%,#1e293b,#020617);color:#e2e8f0;}
+[data-theme="light"]{background:linear-gradient(180deg,#f8fafc,#e2e8f0);color:#0f172a;}
+[data-theme="aurora"]{background:radial-gradient(circle at 30% 20%,rgba(59,130,246,0.4),rgba(14,165,233,0.15) 35%,rgba(107,114,128,0.4) 100%);color:#f8fafc;}
+[data-theme="glass"]{background:linear-gradient(135deg,rgba(15,23,42,0.95),rgba(30,64,175,0.8));color:#f8fafc;}
+[data-theme="neon"]{background:radial-gradient(circle at 20% 20%,rgba(244,114,182,0.5),rgba(56,189,248,0.4) 35%,rgba(17,24,39,0.95) 100%);color:#f8fafc;}
+[data-theme="gradient"]{background:linear-gradient(135deg,#0ea5e9,#6366f1,#14b8a6);color:#f8fafc;}
+[data-theme="classic"]{background:linear-gradient(180deg,#111827,#1f2937);color:#f8fafc;}
+.particles-overlay{background-image:radial-gradient(rgba(255,255,255,0.3) 1px,transparent 1px);background-size:40px 40px;animation:particles 12s linear infinite;}
+@keyframes particles{0%{background-position:0 0;}100%{background-position:200px 200px;}}
+.wave-bg{background:linear-gradient(180deg,rgba(14,116,144,0.35),rgba(8,47,73,0.85));position:absolute;inset:0;overflow:hidden;}
+.wave-bg::after{content:"";position:absolute;inset:-20%;background:radial-gradient(circle at 50% 50%,rgba(34,211,238,0.25),transparent 70%);filter:blur(80px);animation:float 10s ease-in-out infinite;}
+.ripple-button{position:relative;overflow:hidden;}
+.ripple-button span{position:absolute;border-radius:9999px;transform:scale(0);background:rgba(255,255,255,0.35);animation:ripple 0.65s linear;}
+@keyframes ripple{to{transform:scale(4);opacity:0;}}
+.modal-blur{backdrop-filter:blur(20px);}
+.shadow-glow{box-shadow:0 0 45px rgba(34,211,238,0.42);}
+.timeline-grid::-webkit-scrollbar{display:none;}
+.admin-scroll::-webkit-scrollbar{width:6px;}
+.admin-scroll::-webkit-scrollbar-thumb{background:rgba(148,163,184,0.35);border-radius:999px;}
+</style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen">
+<div id="root"></div>
+<script>
+window.firebaseConfig={apiKey:"YOUR_API_KEY",authDomain:"YOUR_AUTH_DOMAIN",projectId:"YOUR_PROJECT_ID",storageBucket:"YOUR_STORAGE_BUCKET",messagingSenderId:"YOUR_SENDER_ID",appId:"YOUR_APP_ID"};
+</script>
+<script src="https://www.gstatic.com/firebasejs/11.0.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.0/firebase-storage-compat.js"></script>
+<script crossorigin src="https://unpkg.com/react@19/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@19/umd/react-dom.development.js"></script>
+<script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/framer-motion@11.2.12/dist/framer-motion.umd.min.js"></script>
+<script src="https://unpkg.com/lucide@0.427.0/dist/umd/lucide.min.js"></script>
+<script type="text/babel" data-presets="env,react">
+const {useState,useEffect,useMemo,useRef,useCallback}=React;
+const {motion,AnimatePresence}=window.framerMotion||{};
+const LucideIcon=({name,className="",strokeWidth=1.5})=>{
+const iconNode=window.lucide&&window.lucide.icons?window.lucide.icons[name]:null;
+if(!iconNode)return null;
+return React.createElement("svg",{viewBox:"0 0 24 24",className,fill:"none",stroke:"currentColor",strokeWidth,strokeLinecap:"round",strokeLinejoin:"round"},iconNode.map((segment,index)=>React.createElement(segment[0],{...segment[1],key:index})));
+};
+const DataService=(()=>{
+const localKey="primesat-dz-state-v1";
+let firebaseReady=false;
+let app=null;
+let db=null;
+let auth=null;
+let storage=null;
+try{
+if(window.firebaseConfig&&Object.values(window.firebaseConfig).every(v=>typeof v==="string"&&!v.includes("YOUR_")&&!v.includes("YOUR"))){
+app=firebase.initializeApp(window.firebaseConfig);
+auth=firebase.auth();
+db=firebase.firestore();
+storage=firebase.storage();
+firebase.firestore().enablePersistence({synchronizeTabs:true}).catch(()=>{});
+firebaseReady=true;
+}else{
+throw new Error("placeholder");
+}
+}catch(err){
+firebaseReady=false;
+}
+const loadState=()=>{
+try{
+const stored=localStorage.getItem(localKey);
+return stored?JSON.parse(stored):null;
+}catch(e){
+return null;
+}
+};
+const saveState=data=>{
+localStorage.setItem(localKey,JSON.stringify(data));
+if(firebaseReady&&db){
+db.collection("settings").doc("global").set(data,{merge:true});
+}
+};
+const onRemoteSnapshot=callback=>{
+if(firebaseReady&&db){
+return db.collection("settings").doc("global").onSnapshot(snap=>{
+const data=snap.data();
+if(data)callback(data);
+});
+}
+return null;
+};
+const saveBlob=async(file,path)=>{
+if(firebaseReady&&storage){
+const ref=storage.ref().child(path);
+await ref.put(file);
+return ref.getDownloadURL();
+}
+return null;
+};
+const signIn=async(email,password)=>{
+if(firebaseReady&&auth){
+const {user}=await auth.signInWithEmailAndPassword(email,password);
+return user;
+}
+return null;
+};
+return{loadState,saveState,onRemoteSnapshot,saveBlob,signIn,status:()=>({firebaseReady,app,db,auth,storage})};
+})();
+const deepMerge=(base,incoming)=>{
+if(Array.isArray(incoming))return incoming.slice();
+const output=Array.isArray(base)?base.slice():{...base};
+Object.keys(incoming||{}).forEach(key=>{
+const baseValue=output[key];
+const nextValue=incoming[key];
+if(nextValue&&typeof nextValue==="object"&&!Array.isArray(nextValue)){
+output[key]=deepMerge(baseValue||{},nextValue);
+}else{
+output[key]=nextValue;
+}
+});
+return output;
+};
+const createServers=()=>{
+const baseNames=["Premium","Elite","Ultra","Family","Sports","Cinema","Kids","Pro","Global","Maghreb","Europe","Africa","Asia","Max","Turbo","Infinity","Galaxy","Flash","Sky","Nova"];
+const types=["M3U","Xtream","Code"];
+const countries=[
+{code:"dz",flag:"🇩🇿",name:{ar:"الجزائر",fr:"Algérie",en:"Algeria"}},
+{code:"fr",flag:"🇫🇷",name:{ar:"فرنسا",fr:"France",en:"France"}},
+{code:"ma",flag:"🇲🇦",name:{ar:"المغرب",fr:"Maroc",en:"Morocco"}},
+{code:"es",flag:"🇪🇸",name:{ar:"إسبانيا",fr:"Espagne",en:"Spain"}},
+{code:"us",flag:"🇺🇸",name:{ar:"أمريكا",fr:"États-Unis",en:"USA"}},
+{code:"sa",flag:"🇸🇦",name:{ar:"السعودية",fr:"Arabie Saoudite",en:"Saudi Arabia"}},
+{code:"tn",flag:"🇹🇳",name:{ar:"تونس",fr:"Tunisie",en:"Tunisia"}}
+];
+const qualities=[["HD","FHD"],["FHD","4K"],["SD","HD"],["HD","4K"],["HD","UHD"],["FHD"],["HD"]];
+const list=[];
+for(let i=0;i<58;i++){
+const name=`PRIMESAT ${baseNames[i%baseNames.length]} ${i+1}`;
+const type=types[i%types.length];
+const duration=30+((i%4)+1)*15;
+const price=1499+((i%6)*250);
+const quality=qualities[i%qualities.length];
+const country=countries[i%countries.length];
+const expiry=Date.now()+((i%24)+5)*86400000;
+list.push({
+id:`srv-${i+1}`,
+name,
+type,
+duration,
+price,
+currency:"DZD",
+quality,
+country,
+expiryTimestamp:expiry,
+remainingSeconds:Math.max(0,Math.floor((expiry-Date.now())/1000)),
+status:"active",
+highlights:i%7===0,
+glow:true,
+notifyYellow:false,
+notifyRed:false,
+notifyExpired:false,
+buyChannel:i%2===0?"whatsapp":"telegram",
+description:{
+ar:"اشتراك IPTV مميز مع قنوات عالمية ومحتوى عند الطلب.",
+fr:"Abonnement IPTV premium avec chaînes mondiales et VOD.",
+en:"Premium IPTV subscription with global channels and VOD."
+},
+popularity:80+(i%20),
+rating:4+((i%10)/10),
+createdAt:Date.now()-i*43200000
+});
+}
+return list;
+};
+/* truncated for brevity */
+</script>
+</body>
+</html>
